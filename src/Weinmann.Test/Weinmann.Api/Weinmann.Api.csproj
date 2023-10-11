@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Weinmann.BusinessLogic\Weinmann.BusinessLogic.csproj" />
     <ProjectReference Include="..\Weinmann.DataAccess\Weinmann.DataAccess.csproj" />
   </ItemGroup>
 

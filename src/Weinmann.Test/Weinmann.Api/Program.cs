@@ -1,4 +1,5 @@
 using Weinmann.DataAccess.Extensions;
+using Weinmann.BusinessLogic.Extensions;
 
 namespace Weinmann.Api;
 
@@ -15,6 +16,7 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         builder.Services.RegisterDataAccess(builder.Configuration);
+        builder.Services.RegisterServices();
 
         var app = builder.Build();
 

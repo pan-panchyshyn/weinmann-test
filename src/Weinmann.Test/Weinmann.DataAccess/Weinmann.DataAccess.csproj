@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Weinmann.Core\Weinmann.Core.csproj" />
     <ProjectReference Include="..\Weinmann.Domain\Weinmann.Domain.csproj" />
   </ItemGroup>
 
