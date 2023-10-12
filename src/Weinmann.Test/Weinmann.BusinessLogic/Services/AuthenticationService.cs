@@ -47,7 +47,7 @@ namespace Weinmann.BusinessLogic.Services
                 PasswordSalt = passwordSalt
             };
 
-            await _customerRepository.Add(newCustomer);
+            await _customerRepository.AddAsync(newCustomer);
             await _customerRepository.SaveChangesAsync();
 
             var result = _mapper.Map<CustomerDTO>(newCustomer);
@@ -58,15 +58,15 @@ namespace Weinmann.BusinessLogic.Services
         public async Task<JwtSecurityToken> Authenticate(CustomerAuthenticationDTO authenticationDTO)
         {
             if (string.IsNullOrEmpty(authenticationDTO.UserName) || string.IsNullOrEmpty(authenticationDTO.Password))
-                return null;
+                throw new UnauthorizedAccessException("Invalid email or password.");
 
             var userCredentials = await _customerRepository.FindByConditionAsync(data => data.UserName == authenticationDTO.UserName);
 
             if (userCredentials == null)
-                return null;
+                throw new UnauthorizedAccessException("Invalid email or password."); ;
 
             if (!VerifyPasswordHash(authenticationDTO.Password, userCredentials.PasswordHash, userCredentials.PasswordSalt))
-                return null;
+                throw new UnauthorizedAccessException("Invalid email or password."); ;
 
             var claims = new List<Claim>
                 {

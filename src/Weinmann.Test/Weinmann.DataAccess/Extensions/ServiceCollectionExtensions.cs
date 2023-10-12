@@ -12,6 +12,9 @@ public static class ServiceCollectionExtensions
     {
         services.AddDbContext<WeinmannDataContext>(options => options.UseSqlServer(configuration.GetConnectionString("weinmann")));
 
+        services.AddScoped<IBusinessLocationRepository, BusinessLocationRepository>();
+        services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
     }
 }
