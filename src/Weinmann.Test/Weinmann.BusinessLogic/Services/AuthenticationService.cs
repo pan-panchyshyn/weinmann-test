@@ -47,7 +47,7 @@ namespace Weinmann.BusinessLogic.Services
                 PasswordSalt = passwordSalt
             };
 
-            await _customerRepository.Add(newCustomer);
+            await _customerRepository.AddAsync(newCustomer);
             await _customerRepository.SaveChangesAsync();
 
             var result = _mapper.Map<CustomerDTO>(newCustomer);
