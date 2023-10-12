@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weinmann.Api", "Weinmann.Ap
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weinmann.Domain", "Weinmann.Domain\Weinmann.Domain.csproj", "{A8F36B1E-CD88-4585-96EA-2F73393CBDE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weinmann.DataAccess", "Weinmann.DataAccess\Weinmann.DataAccess.csproj", "{99E29B6A-AD82-4152-8137-DA2BEC6A8AD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weinmann.DataAccess", "Weinmann.DataAccess\Weinmann.DataAccess.csproj", "{99E29B6A-AD82-4152-8137-DA2BEC6A8AD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weinmann.BusinessLogic", "Weinmann.BusinessLogic\Weinmann.BusinessLogic.csproj", "{06522122-0AD1-45A2-811F-D0F27DAF79E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weinmann.BusinessLogic", "Weinmann.BusinessLogic\Weinmann.BusinessLogic.csproj", "{06522122-0AD1-45A2-811F-D0F27DAF79E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weinmann.Core", "Weinmann.Core\Weinmann.Core.csproj", "{1A947983-C99B-448D-B382-C151FC6A0FD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weinmann.Core", "Weinmann.Core\Weinmann.Core.csproj", "{1A947983-C99B-448D-B382-C151FC6A0FD7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

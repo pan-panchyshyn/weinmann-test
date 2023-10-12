@@ -21,8 +21,49 @@ namespace Weinmann.Api.Controllers
         [Route("api/register")]
         public async Task<IActionResult> Register([FromBody] RegistrationDTO registrationDTO)
         {
-            await _authenticationService.Register(registrationDTO);
-            return Ok();
+            try
+            {
+                await _authenticationService.Register(registrationDTO);
+                var encodedJwt = await _authenticationService.Authenticate(registrationDTO);
+
+                var response = new
+                {
+                    user_name = registrationDTO.UserName,
+                    access_token = encodedJwt,
+                    token_lifeTime = 3600000
+                };
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("api/authenticate")]
+        public async Task<IActionResult> Authenticate([FromBody] RegistrationDTO registrationDTO)
+        {
+            try
+            {
+                var encodedJwt = await _authenticationService.Authenticate(registrationDTO);
+
+                var response = new
+                {
+                    user_name = registrationDTO.UserName,
+                    access_token = encodedJwt,
+                    token_lifeTime = 3600000
+                };
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

@@ -9,6 +9,8 @@ namespace Weinmann.BusinessLogic.Extensions
         public static void RegisterServices(this IServiceCollection services)
         {
             services.AddTransient<IAuthenticationService, AuthenticationService>();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
     }
 }
