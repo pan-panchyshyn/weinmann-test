@@ -19,12 +19,16 @@ namespace Weinmann.Api.Controllers
         [AllowAnonymous]
         [HttpPost]
         [Route("api/register")]
-        public async Task<IActionResult> Register([FromBody] RegistrationDTO registrationDTO)
+        public async Task<IActionResult> Register([FromBody] CustomerRegistrationDTO registrationDTO)
         {
             try
             {
                 await _authenticationService.Register(registrationDTO);
-                var encodedJwt = await _authenticationService.Authenticate(registrationDTO);
+                var encodedJwt = await _authenticationService.Authenticate(new CustomerAuthenticationDTO 
+                {
+                    UserName = registrationDTO.UserName,
+                    Password = registrationDTO.Password
+                });
 
                 var response = new
                 {
@@ -45,7 +49,7 @@ namespace Weinmann.Api.Controllers
         [AllowAnonymous]
         [HttpPost]
         [Route("api/authenticate")]
-        public async Task<IActionResult> Authenticate([FromBody] RegistrationDTO registrationDTO)
+        public async Task<IActionResult> Authenticate([FromBody] CustomerAuthenticationDTO registrationDTO)
         {
             try
             {
