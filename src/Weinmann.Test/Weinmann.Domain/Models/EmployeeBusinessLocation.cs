@@ -1,6 +1,6 @@
 ﻿namespace Weinmann.Domain.Models
 {
-    public class EmployeeBusinessLocation
+    public class EmployeeBusinessLocation : BaseEntity
     {
         public int EmployeeId { get; set; }
         public int BusinessLocationId { get; set; }

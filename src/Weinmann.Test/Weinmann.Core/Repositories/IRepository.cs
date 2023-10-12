@@ -12,6 +12,8 @@ namespace Weinmann.Core.Repositories
         public Task<T> FindByConditionAsync(Expression<Func<T, bool>> predicate);
         public Task UpdateAsync(T entityToUpdate);
         public Task RemoveAsync(T entityToRemove);
+
+        public Task RemoveRangeAsync(List<T> entitiesToRemove);
         public Task<bool> SaveChangesAsync();
     }
 }

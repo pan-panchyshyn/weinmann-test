@@ -8,10 +8,10 @@ namespace Weinmann.BusinessLogic.Services
 {
     internal class BusinessLocationService : IBusinessLocationService
     {
-        private readonly IRepository<BusinessLocation> _businessLocationRepository;
+        private readonly IBusinessLocationRepository _businessLocationRepository;
         private readonly IMapper _mapper;
 
-        public BusinessLocationService(IRepository<BusinessLocation> businessLocationRepository, IMapper mapper)
+        public BusinessLocationService(IBusinessLocationRepository businessLocationRepository, IMapper mapper)
         {
             _businessLocationRepository = businessLocationRepository;
             _mapper = mapper;

@@ -21,26 +21,31 @@ namespace Weinmann.DataAccess.Repositories
             await _entities.AddAsync(newEntity);
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public virtual async Task<T> GetByIdAsync(int id)
         {
             var result = await _entities.FirstOrDefaultAsync(s => s.Id == id);
             return result;
         }
 
-        public async Task<T> FindByConditionAsync(Expression<Func<T, bool>> predicate)
+        public virtual async Task<T> FindByConditionAsync(Expression<Func<T, bool>> predicate)
         {
             var result = await _context.Set<T>().FirstOrDefaultAsync(predicate);
             return result;
         }
 
-        public async Task<List<T>> ListAsync()
+        public virtual async Task<List<T>> ListAsync()
         {
             return await _entities.ToListAsync();
         }
 
-        public async Task<List<T>> ListAsync(Expression<Func<T, bool>> predicate)
+        public virtual async Task<List<T>> ListAsync(Expression<Func<T, bool>> predicate)
         {
             return await _entities.Where(predicate).ToListAsync();
+        }
+
+        public async Task UpdateAsync(T entityToUpdate)
+        {
+            _entities.Update(entityToUpdate);
         }
 
         public async Task RemoveAsync(T entityToRemove)
@@ -48,9 +53,9 @@ namespace Weinmann.DataAccess.Repositories
             _entities.Remove(entityToRemove);
         }
 
-        public async Task UpdateAsync(T entityToUpdate)
+        public async Task RemoveRangeAsync(List<T> entitiesToRemove)
         {
-            _entities.Update(entityToUpdate);
+            _entities.RemoveRange(entitiesToRemove);
         }
 
         public async Task<bool> SaveChangesAsync()
