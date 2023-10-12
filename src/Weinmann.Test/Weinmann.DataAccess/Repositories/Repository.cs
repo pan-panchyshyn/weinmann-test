@@ -16,12 +16,12 @@ namespace Weinmann.DataAccess.Repositories
             _entities = context.Set<T>();
         }
 
-        public async Task Add(T newEntity)
+        public async Task AddAsync(T newEntity)
         {
             await _entities.AddAsync(newEntity);
         }
 
-        public async Task<T> GetById(int id)
+        public async Task<T> GetByIdAsync(int id)
         {
             var result = await _entities.FirstOrDefaultAsync(s => s.Id == id);
             return result;
@@ -33,24 +33,24 @@ namespace Weinmann.DataAccess.Repositories
             return result;
         }
 
-        public async Task<List<T>> List()
+        public async Task<List<T>> ListAsync()
         {
             return await _entities.ToListAsync();
         }
 
-        public async Task<List<T>> List(Expression<Func<T, bool>> predicate)
+        public async Task<List<T>> ListAsync(Expression<Func<T, bool>> predicate)
         {
             return await _entities.Where(predicate).ToListAsync();
         }
 
-        public async Task<T> Remove(T entityToRemove)
+        public async Task RemoveAsync(T entityToRemove)
         {
-            throw new NotImplementedException();
+            _entities.Remove(entityToRemove);
         }
 
-        public async Task<T> Update(T entityToUpdate)
+        public async Task UpdateAsync(T entityToUpdate)
         {
-            throw new NotImplementedException();
+            _entities.Update(entityToUpdate);
         }
 
         public async Task<bool> SaveChangesAsync()

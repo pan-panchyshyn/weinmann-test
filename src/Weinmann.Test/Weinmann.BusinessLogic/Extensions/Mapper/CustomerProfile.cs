@@ -12,7 +12,8 @@ namespace Weinmann.BusinessLogic.Extensions.Mapper
                 .ForMember(model => model.PasswordHash, option => option.Ignore())
                 .ForMember(model => model.PasswordSalt, option => option.Ignore());
 
-            CreateMap<Customer, CustomerDTO>();
+            CreateMap<Customer, CustomerDTO>()
+                .ForMember(model => model.BusinessLocationName, option => option.MapFrom(dto => dto.BusinessLocation.Name));
         }
     }
 }

@@ -4,19 +4,16 @@ namespace Weinmann.Domain.Models
 {
     public class Customer : BaseEntity
     {
-        public string UserName { get; private set; }
+        public string UserName { get; set; }
+
+        public int BusinessLocationId { get; set; }
 
         [Required]
-        public byte[] PasswordHash { get; private set; }
+        public byte[] PasswordHash { get; set; }
 
         [Required]
-        public byte[] PasswordSalt { get; private set; }
+        public byte[] PasswordSalt { get; set; }
 
-        public Customer(string userName, byte[] passwordHash, byte[] passwordSalt)
-        {
-            UserName = userName;
-            PasswordHash = passwordHash;
-            PasswordSalt = passwordSalt;
-        }
+        public BusinessLocation BusinessLocation { get; set; }
     }
 }

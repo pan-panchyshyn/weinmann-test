@@ -24,7 +24,7 @@ namespace Weinmann.BusinessLogic.Services
             _configuration = configuration;
         }
 
-        public async Task<CustomerDTO> Register(RegistrationDTO registrationDTO)
+        public async Task<CustomerDTO> Register(CustomerRegistrationDTO registrationDTO)
         {
             if (registrationDTO == null)
                 throw new ArgumentNullException(nameof(registrationDTO));
@@ -40,7 +40,12 @@ namespace Weinmann.BusinessLogic.Services
 
             CreatePasswordHash(registrationDTO.Password, out var passwordHash, out var passwordSalt);
 
-            var newCustomer = new Customer(registrationDTO.UserName, passwordHash, passwordSalt);
+            var newCustomer = new Customer {
+                UserName = registrationDTO.UserName,
+                BusinessLocationId = registrationDTO.BusinessLocationId,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt
+            };
 
             await _customerRepository.Add(newCustomer);
             await _customerRepository.SaveChangesAsync();
@@ -50,22 +55,22 @@ namespace Weinmann.BusinessLogic.Services
             return result;
         }
 
-        public async Task<JwtSecurityToken> Authenticate(RegistrationDTO registrationDTO)
+        public async Task<JwtSecurityToken> Authenticate(CustomerAuthenticationDTO authenticationDTO)
         {
-            if (string.IsNullOrEmpty(registrationDTO.UserName) || string.IsNullOrEmpty(registrationDTO.Password))
+            if (string.IsNullOrEmpty(authenticationDTO.UserName) || string.IsNullOrEmpty(authenticationDTO.Password))
                 return null;
 
-            var userCredentials = await _customerRepository.FindByConditionAsync(data => data.UserName == registrationDTO.UserName);
+            var userCredentials = await _customerRepository.FindByConditionAsync(data => data.UserName == authenticationDTO.UserName);
 
             if (userCredentials == null)
                 return null;
 
-            if (!VerifyPasswordHash(registrationDTO.Password, userCredentials.PasswordHash, userCredentials.PasswordSalt))
+            if (!VerifyPasswordHash(authenticationDTO.Password, userCredentials.PasswordHash, userCredentials.PasswordSalt))
                 return null;
 
             var claims = new List<Claim>
                 {
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, registrationDTO.UserName)
+                    new Claim(ClaimsIdentity.DefaultNameClaimType, authenticationDTO.UserName)
                 };
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
 
