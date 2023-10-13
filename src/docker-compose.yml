@@ -16,5 +16,5 @@ services:
          - "1433:1433"
 
       environment:
-         SA_PASSWORD: "Winter_Silence"
+         SA_PASSWORD: "S1k8l6o7dovska"
          ACCEPT_EULA: "Y"
