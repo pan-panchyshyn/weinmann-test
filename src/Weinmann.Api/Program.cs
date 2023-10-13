@@ -1,8 +1,9 @@
-using Weinmann.DataAccess.Extensions;
-using Weinmann.BusinessLogic.Extensions;
+using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
+using Weinmann.Api.Middlewares;
+using Weinmann.BusinessLogic.Extensions;
+using Weinmann.DataAccess.Extensions;
 using Weinmann.DataAccess;
 using Microsoft.EntityFrameworkCore;
 
@@ -51,6 +52,7 @@ public class Program
 
         app.UseAuthentication();
         app.UseAuthorization();
+        app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 
         app.MapControllers();

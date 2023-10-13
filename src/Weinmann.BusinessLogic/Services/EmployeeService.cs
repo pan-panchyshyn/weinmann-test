@@ -71,6 +71,7 @@ namespace Weinmann.BusinessLogic.Services
             var entityToremove = await _employeeRepository.GetByIdAsync(EmployeeId);
 
             await _employeeRepository.RemoveAsync(entityToremove);
+            await _employeeRepository.SaveChangesAsync();
         }
 
         public async Task<EmployeeDTO> UpdateEmployee(int employeeId, UpdateEmployeeDTO updateEmployeeDTO)
