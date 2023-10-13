@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Weinmann.Core.Repositories;
 using Weinmann.Core.Services;
-using Weinmann.Domain.DTOs;
+using Weinmann.Domain.DTOs.Customer;
 using Weinmann.Domain.Models;
 
 namespace Weinmann.BusinessLogic.Services

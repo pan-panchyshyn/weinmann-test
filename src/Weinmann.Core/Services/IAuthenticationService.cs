@@ -1,5 +1,5 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
-using Weinmann.Domain.DTOs;
+using Weinmann.Domain.DTOs.Customer;
 
 namespace Weinmann.Core.Services
 {

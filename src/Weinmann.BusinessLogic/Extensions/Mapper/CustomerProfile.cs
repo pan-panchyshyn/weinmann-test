@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Weinmann.Domain.DTOs;
+using Weinmann.Domain.DTOs.Customer;
 using Weinmann.Domain.Models;
 
 namespace Weinmann.BusinessLogic.Extensions.Mapper

@@ -59,6 +59,9 @@ namespace Weinmann.BusinessLogic.Services
         {
             var entityToUpdate = await _businessLocationRepository.GetByIdAsync(businessLocationId);
 
+            if (entityToUpdate == null)
+                throw new EntityNotFoundException($"No business location found by given Id: {businessLocationId}");
+
             entityToUpdate.Name = updateBusinessLocationDTO.Name;
             entityToUpdate.PhoneNumber = updateBusinessLocationDTO.PhoneNumber;
             entityToUpdate.Address = updateBusinessLocationDTO.Address;
@@ -73,9 +76,14 @@ namespace Weinmann.BusinessLogic.Services
         public async Task RemoveBusinessLocation(int businessLocationId)
         {
             var entityToRemove = await _businessLocationRepository.GetByIdAsync(businessLocationId);
+
+            if (entityToRemove == null)
+                throw new EntityNotFoundException($"No business location found by given Id: {businessLocationId}");
+
             if (entityToRemove != null)
             {
                 await _businessLocationRepository.RemoveAsync(entityToRemove: entityToRemove);
+                await _businessLocationRepository.SaveChangesAsync();
             }
         }
     }

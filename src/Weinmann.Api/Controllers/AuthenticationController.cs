@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Weinmann.Core.Services;
-using Weinmann.Domain.DTOs;
+using Weinmann.Domain.DTOs.Customer;
 
 namespace Weinmann.Api.Controllers
 {
