@@ -28,6 +28,14 @@ namespace Weinmann.DataAccess
                 .HasMany(businessLocation => businessLocation.Customers)
                 .WithOne(customer => customer.BusinessLocation);
 
+            modelBuilder.Entity<BusinessLocation>().HasData(new BusinessLocation 
+            {
+                Id = 1,
+                Name = "Initial Business Location",
+                Address = "Some street",
+                PhoneNumber = "1234567890"
+            });
+
             modelBuilder.Entity<Employee>()
                 .HasKey(employee => employee.Id);
 
@@ -43,6 +51,15 @@ namespace Weinmann.DataAccess
                 .HasOne(ebc => ebc.BusinessLocation)
                 .WithMany(e => e.EmployeeBusinessLocations)
                 .HasForeignKey(e => e.BusinessLocationId);
+
+            modelBuilder.Entity<Employee>().HasData(new Employee
+            {
+                Id = 1,
+                FirstName = "Initial",
+                LastName = "Employee",
+                Email = "initial@Employee.mail",
+                PhoneNumber = "1234567890"
+            });
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

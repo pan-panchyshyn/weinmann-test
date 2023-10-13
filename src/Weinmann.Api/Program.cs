@@ -4,6 +4,8 @@ using Microsoft.IdentityModel.Tokens;
 using Weinmann.Api.Middlewares;
 using Weinmann.BusinessLogic.Extensions;
 using Weinmann.DataAccess.Extensions;
+using Weinmann.DataAccess;
+using Microsoft.EntityFrameworkCore;
 
 namespace Weinmann.Api;
 
@@ -54,6 +56,12 @@ public class Program
 
 
         app.MapControllers();
+
+        using (var scope = app.Services.CreateScope())
+        {
+            var db = scope.ServiceProvider.GetRequiredService<WeinmannDataContext>();
+            db.Database.Migrate();
+        }
 
         app.Run();
     }

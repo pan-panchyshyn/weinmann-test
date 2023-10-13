@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Weinmann.DataAccess;
 
@@ -10,9 +11,11 @@ using Weinmann.DataAccess;
 namespace Weinmann.DataAccess.Migrations
 {
     [DbContext(typeof(WeinmannDataContext))]
-    partial class WeinmannDataContextModelSnapshot : ModelSnapshot
+    [Migration("20231013020959_SeedInitialData")]
+    partial class SeedInitialData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,6 +47,15 @@ namespace Weinmann.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("BusinessLocations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "Some street",
+                            Name = "Initial Business Location",
+                            PhoneNumber = "1234567890"
+                        });
                 });
 
             modelBuilder.Entity("Weinmann.Domain.Models.Customer", b =>
@@ -103,6 +115,16 @@ namespace Weinmann.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Employees");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "initial@Employee.mail",
+                            FirstName = "Initial",
+                            LastName = "Employee",
+                            PhoneNumber = "1234567890"
+                        });
                 });
 
             modelBuilder.Entity("Weinmann.Domain.Models.EmployeeBusinessLocation", b =>
@@ -111,6 +133,9 @@ namespace Weinmann.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id")
                         .HasColumnType("int");
 
                     b.HasKey("BusinessLocationId", "EmployeeId");
