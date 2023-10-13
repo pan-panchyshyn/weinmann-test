@@ -27,6 +27,7 @@ namespace Weinmann.BusinessLogic.Services
             };
 
             await _businessLocationRepository.AddAsync(entityToCreate);
+            await _businessLocationRepository.SaveChangesAsync();
 
             var dto = _mapper.Map<BusinessLocationDTO>(entityToCreate);
             
@@ -35,7 +36,10 @@ namespace Weinmann.BusinessLogic.Services
 
         public async Task<BusinessLocationDTO> GetBusinessLocationById(int businessLocationId)
         {
-            var entity = _businessLocationRepository.GetByIdAsync(businessLocationId);
+            var entity = await _businessLocationRepository.GetByIdAsync(businessLocationId);
+
+            if (entity == null) 
+                throw new EntityNotFoundException($"No business location found by given Id: {businessLocationId}");
 
             var dto = _mapper.Map<BusinessLocationDTO>(entity);
 
