@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weinmann.BusinessLogic", "W
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weinmann.Core", "Weinmann.Core\Weinmann.Core.csproj", "{1A947983-C99B-448D-B382-C151FC6A0FD7}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{898016F5-7256-4C2A-9AC7-4588832399E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{1A947983-C99B-448D-B382-C151FC6A0FD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A947983-C99B-448D-B382-C151FC6A0FD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A947983-C99B-448D-B382-C151FC6A0FD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{898016F5-7256-4C2A-9AC7-4588832399E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{898016F5-7256-4C2A-9AC7-4588832399E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{898016F5-7256-4C2A-9AC7-4588832399E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{898016F5-7256-4C2A-9AC7-4588832399E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

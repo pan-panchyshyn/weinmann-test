@@ -14,11 +14,14 @@ COPY ["Weinmann.Api/Weinmann.Api.csproj", "Weinmann.Api/"]
 COPY ["Weinmann.BusinessLogic/Weinmann.BusinessLogic.csproj", "Weinmann.BusinessLogic/"]
 COPY ["Weinmann.Core/Weinmann.Core.csproj", "Weinmann.Core/"]
 COPY ["Weinmann.Domain/Weinmann.Domain.csproj", "Weinmann.Domain/"]
-COPY ["Weinmann.DataAccess/Weinmann.DataAccess.csproj", "Weinmann.DataAccess/"]
+COPY ["Weinmann.DataAccess/Weinmann.DataAccess.csproj", "/Weinmann.DataAccess/"]
 RUN dotnet restore "Weinmann.Api/Weinmann.Api.csproj"
 COPY . .
 WORKDIR "/src/Weinmann.Api"
 RUN dotnet build "Weinmann.Api.csproj" -c Release -o /app/build
+
+# Set the environment path for the EF CLI tool
+ENV PATH="${PATH}:/root/.dotnet/tools"
 
 FROM build AS publish
 RUN dotnet publish "Weinmann.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
@@ -27,9 +30,3 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Weinmann.Api.dll"]
-
-# Install Entity Framework CLI
-RUN dotnet tool install --global dotnet-ef --version 6.0.0
-
-# Run migrations on startup
-CMD /root/.dotnet/tools/dotnet-ef database update && dotnet WebAPI.dll
