@@ -1,4 +1,4 @@
-﻿namespace Weinmann.Domain.DTOs
+﻿namespace Weinmann.Domain.DTOs.Customer
 {
     public class CustomerRegistrationDTO
     {

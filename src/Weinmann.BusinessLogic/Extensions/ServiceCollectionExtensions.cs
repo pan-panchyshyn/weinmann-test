@@ -11,6 +11,7 @@ namespace Weinmann.BusinessLogic.Extensions
             services.AddTransient<IAuthenticationService, AuthenticationService>();
             services.AddTransient<IBusinessLocationService, BusinessLocationService>();
             services.AddTransient<IEmployeeService, EmployeeService>();
+            services.AddTransient<ICustomerService, CustomerService>();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }

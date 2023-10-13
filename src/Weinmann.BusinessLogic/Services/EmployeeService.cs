@@ -48,9 +48,12 @@ namespace Weinmann.BusinessLogic.Services
             return dto;
         }
 
-        public async Task<EmployeeDTO> GetEmployeeById(int EmployeeId)
+        public async Task<EmployeeDTO> GetEmployeeById(int employeeId)
         {
-            var entity = _employeeRepository.GetByIdAsync(EmployeeId);
+            var entity = _employeeRepository.GetByIdAsync(employeeId);
+
+            if (entity == null)
+                throw new EntityNotFoundException($"No employee found by given Id: {employeeId}");
 
             var dto = _mapper.Map<EmployeeDTO>(entity);
 
@@ -66,17 +69,12 @@ namespace Weinmann.BusinessLogic.Services
             return dtos;
         }
 
-        public async Task RemoveEmployee(int EmployeeId)
-        {
-            var entityToremove = await _employeeRepository.GetByIdAsync(EmployeeId);
-
-            await _employeeRepository.RemoveAsync(entityToremove);
-            await _employeeRepository.SaveChangesAsync();
-        }
-
         public async Task<EmployeeDTO> UpdateEmployee(int employeeId, UpdateEmployeeDTO updateEmployeeDTO)
         {
             var entityToUpdate = await _employeeRepository.GetByIdAsync(employeeId);
+
+            if (entityToUpdate == null)
+                throw new EntityNotFoundException($"No employee found by given Id: {employeeId}");
 
             entityToUpdate.Email = updateEmployeeDTO.Email;
             entityToUpdate.FirstName = updateEmployeeDTO.FirstName;
@@ -121,6 +119,17 @@ namespace Weinmann.BusinessLogic.Services
 
             var dto = _mapper.Map<EmployeeDTO>(entityToUpdate);
             return dto;
+        }
+
+        public async Task RemoveEmployee(int employeeId)
+        {
+            var entityToremove = await _employeeRepository.GetByIdAsync(employeeId);
+
+            if (entityToremove == null)
+                throw new EntityNotFoundException($"No employee found by given Id: {employeeId}");
+
+            await _employeeRepository.RemoveAsync(entityToremove);
+            await _employeeRepository.SaveChangesAsync();
         }
     }
 }
